@@ -1,0 +1,32 @@
+* Projet de compilation
+
+* Introduction
+
+Dans ce projet, vous trouverez la passe LoopsInfo qui permet de faire le comptage
+des chemins dans un programme. Cette version effecture un parcours en profondeur
+afin de déterminer les différents chemins d'une boucle. Pour rappel, seules les 
+boucles innermost ont bénéficié d'un comptage de chemin.
+
+Il y a également la passe LoopsRDTSC qui permet de sonder le temps d'exécution d'une boucle.
+Pour se faire, la passe LoopSimplifyForm a été utilisée afin de garantif l'existance
+d'un unique prédécésseur à l'en-tête d'une boucle ainsi que des sorties dédiées.
+Cela a permis d'insérer un block de base à l'entrée et à la sortie des boucles afin
+de mesurer le temps qui s'est écoulé.
+
+** Compilation
+
+Au cours de ce projet, la compilation des passes s'est reposé sur le CMake fourni
+par LLVM. Dans ce cas, il faut placer les répertoires contenant les passes
+dans le dosser {llvm-prject}/llvm.lib/Transform/ et veiller à les inclues dans
+le CmakeLists.txt du répertoire Transform.
+
+** Tests
+
+Une batterie de tests est disponible, avec les différentes sorties obtenues et
+étudiées durant ce travail. Elle se compose de cinq boucles simples (basic_loop),
+d'une simple boucle contenant un if (simple_loop) afin de vérifier l'exctitude 
+du comptage des chemins, un produit de vecteur (dotprod_loops) et un produit de 
+matrices (loops) afin d'avoir un apperçu des passes implémentées.
+
+NB: Veillez à remplacer les chemins vers les binaires de clang/opt ainsi que des
+librairies (LLVMLoopsInfo.so et LLVMLoopsRDTSC.so) dans le Makefile fourni.
